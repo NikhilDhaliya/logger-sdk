@@ -1,0 +1,14 @@
+{
+  "name": "monilog-test-app",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "A test application for monilog-sdk",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "monilog-sdk": "file:.."
+  }
+}
