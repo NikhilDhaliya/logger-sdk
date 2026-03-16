@@ -9,6 +9,7 @@ const port = 3000;
 
 // Initialize Monilog SDK middleware
 app.use(monitor({
+    serviceName: 'Marketplace API',
     slackWebhookUrl: process.env.SLACK_WEBHOOK_URL || 'https://hooks.slack.com/services/YOUR_WEBHOOK_URL',
     logFilePath: './test-logs.txt',
     maxLogSize: 1024 * 1024, // 1MB

@@ -3,6 +3,7 @@ import path from 'path';
 import { sendSlackNotification } from './slack.js';
 
 interface MonitorOptions {
+    serviceName?: string;
     slackWebhookUrl?: string;
     logFilePath?: string;
     monitorStatusCodes?: number[]; // Specific status codes to monitor
@@ -11,6 +12,7 @@ interface MonitorOptions {
 }
 
 export function monitor(options: MonitorOptions = {}) {
+    const serviceName = options.serviceName;
     const logFilePath = options.logFilePath || path.join(process.cwd(), 'logs.txt');
     const slackWebhookUrl = options.slackWebhookUrl;
     const monitorStatusCodes = options.monitorStatusCodes || [];
@@ -88,6 +90,7 @@ export function monitor(options: MonitorOptions = {}) {
                 if (slackWebhookUrl) {
                     sendSlackNotification(slackWebhookUrl, {
                         title: `Monitor Alert: ${res.statusCode}`,
+                        serviceName,
                         ...logEntry
                     });
                 } else {

@@ -24,6 +24,7 @@ import { monitor } from 'monilog-sdk';
 const app = express();
 
 app.use(monitor({
+  serviceName: 'Any service',
   slackWebhookUrl: process.env.SLACK_WEBHOOK_URL || 'https://hooks.slack.com/services/YOUR_WEBHOOK_URL',
   logFilePath: './logs/app.log',
   maxLogSize: 10 * 1024 * 1024, // 10MB
@@ -49,6 +50,7 @@ app.listen(3000, () => console.log('Server running on port 3000'));
 
 | Option | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
+| `serviceName` | `string` | `undefined` | A name to identify the backend service in Slack alerts. |
 | `slackWebhookUrl` | `string` | `undefined` | Your Slack incoming webhook URL for alerts. |
 | `logFilePath` | `string` | `./logs.txt` | Path where logs will be stored. |
 | `monitorStatusCodes` | `number[]` | `[]` | Additional status codes to trigger Slack alerts. |
