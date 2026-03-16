@@ -24,7 +24,7 @@ import { monitor } from 'monilog-sdk';
 const app = express();
 
 app.use(monitor({
-  slackWebhookUrl: 'https://hooks.slack.com/services/YOUR_WEBHOOK_URL',
+  slackWebhookUrl: process.env.SLACK_WEBHOOK_URL || 'https://hooks.slack.com/services/YOUR_WEBHOOK_URL',
   logFilePath: './logs/app.log',
   maxLogSize: 10 * 1024 * 1024, // 10MB
   maxFiles: 5
