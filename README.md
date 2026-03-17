@@ -42,7 +42,7 @@ app.listen(3000, () => console.log('Server running on port 3000'));
 
 -   **Zero-Config Monitoring**: Automatically captures method, URL, status code, duration, and client IP.
 -   **Smart Log Rotation**: Built-in log rotation to prevent disk space exhaustion (5MB default).
--   **Real-time Alerts**: Instant Slack notifications for `4xx` and `5xx` errors.
+-   **Real-time Alerts**: Instant Slack notifications for `4xx` and `5xx` errors, with automated response body capture for better context.
 -   **Selective Monitoring**: Track specific status codes that matter to your business logic.
 -   **Robust & Lightweight**: Minimal dependencies (only `axios`) and designed for low overhead.
 

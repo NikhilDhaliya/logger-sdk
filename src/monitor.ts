@@ -58,7 +58,25 @@ export function monitor(options: MonitorOptions = {}) {
 
         res.end = function (chunk: any, encoding: any) {
             const duration = Date.now() - start;
-            const logEntry = {
+
+            let errorMessage = '';
+            if (chunk && (res.statusCode >= 400)) {
+                try {
+                    const body = chunk.toString();
+                    try {
+                        const parsedBody = JSON.parse(body);
+                        errorMessage = parsedBody.error || parsedBody.message || '';
+                    } catch (e) {
+                        // If not JSON, take a snippet of the text (first 100 chars)
+                        errorMessage = body.substring(0, 100).trim();
+                        if (body.length > 100) errorMessage += '...';
+                    }
+                } catch (e) {
+                    // Fallback for unexpected chunk types or string conversion issues
+                }
+            }
+
+            const logEntry: any = {
                 timestamp: new Date().toISOString(),
                 method: req.method,
                 url: req.originalUrl || req.url,
@@ -67,6 +85,10 @@ export function monitor(options: MonitorOptions = {}) {
                 // Robust IP detection for Express 4/5
                 ip: req.ip || req.connection?.remoteAddress || req.socket?.remoteAddress,
             };
+
+            if (errorMessage) {
+                logEntry.errorMessage = errorMessage;
+            }
 
             const logString = JSON.stringify(logEntry) + '\n';
 

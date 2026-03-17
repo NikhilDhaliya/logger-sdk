@@ -32,6 +32,10 @@ app.get('/error-500', (req, res) => {
     res.status(500).json({ error: 'This is a 500 Internal Server Error. Check your Slack!' });
 });
 
+app.get('/error-text', (req, res) => {
+    res.status(500).send('This is a plain text internal server error that is quite long to test the snippet functionality of our new capture logic.');
+});
+
 app.listen(port, () => {
     console.log(`Test app listening at http://localhost:${port}`);
     console.log('Try visiting:');

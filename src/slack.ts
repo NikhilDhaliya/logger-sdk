@@ -4,9 +4,11 @@ export async function sendSlackNotification(webhookUrl: string, logData: any) {
     try {
         // Format the message for Slack
         const serviceHeader = logData.serviceName ? `*Service*: \`${logData.serviceName}\`\n` : '';
+        const errorDetail = logData.errorMessage ? `> *Error*: \`${logData.errorMessage}\`\n` : '';
         const formattedText = `*${logData.title || 'Monitor Alert'}*\n` +
             serviceHeader +
             `> *Endpoint*: \`${logData.method} ${logData.url}\`\n` +
+            errorDetail +
             `> *Latency*: \`${logData.duration}\`\n` +
             `> *Time*: \`${new Date(logData.timestamp).toLocaleString()}\`\n` +
             `> *IP Address*: \`${logData.ip}\``;

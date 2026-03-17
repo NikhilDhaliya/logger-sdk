@@ -1,6 +1,6 @@
 {
   "name": "monilog-sdk",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "type": "module",
   "description": "A middleware-based logger SDK for Node.js backend applications to monitor logs and send Slack alerts.",
   "main": "dist/index.js",
